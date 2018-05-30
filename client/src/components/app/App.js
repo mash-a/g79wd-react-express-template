@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import './App.css';
 import Book from '../book/Book';
+import Header from '../header/Header';
+import BookForm from '../form/BookForm';
 
 class App extends Component {
   state = {
     loading: true,
     books: []
+  }
+
+  updateBooks = (books) => {
+    this.setState({books: books})
   }
 
   componentWillMount = async () => {
@@ -21,6 +27,8 @@ class App extends Component {
     });
     return (
       <div className="App">
+        <Header />
+        <BookForm updateBooks={this.updateBooks}/>
         {
           !this.state.loading && books
         }

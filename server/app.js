@@ -23,6 +23,12 @@ app.get('/api/books', (req, res, next) => {
   knex('books').then(books => res.json({books: books}))
 })
 
+app.post('/api/books', (req, res, next) => {
+  knex('books').insert(req.body).then(() => {
+    knex('books').then(books => res.json(books))
+  })
+})
+
 app.get('/', (req, res, next) => {
   const index = path.join(__dirname, '../client/build/index.html')
   res.sendFile(index)
