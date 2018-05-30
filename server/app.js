@@ -18,6 +18,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.get('/api/ping', (req, res, next) => {
   res.json({ message: 'pong!' })
 })
+
+app.get('/api/books', (req, res, next) => {
+  knex('books').then(books => res.json({books: books}))
+})
+
 app.get('/', (req, res, next) => {
   const index = path.join(__dirname, '../client/build/index.html')
   res.sendFile(index)

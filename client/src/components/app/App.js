@@ -1,23 +1,28 @@
 import React, { Component } from 'react';
 import './App.css';
+import Book from '../book/Book';
 
 class App extends Component {
   state = {
     loading: true,
+    books: []
   }
 
   componentWillMount = async () => {
-    const response = await fetch('/api/ping')
+    const response = await fetch('/api/books')
     const json = await response.json()
-    if (json.message) this.setState({ loading: false})
+    console.log(json.books)
+    if (json.books) this.setState({ loading: false, books: json.books})
   }
 
   render() {
+    const books = this.state.books.map( (book) => {
+      return <Book key={book.id} book={book} />
+    });
     return (
       <div className="App">
         {
-          !this.state.loading &&
-          <h1>You've connected to the server!</h1>
+          !this.state.loading && books
         }
       </div>
     );
