@@ -3,7 +3,6 @@ import './BookForm.css';
 import axios from 'axios';
 
 class BookForm extends Component {
-  state = {}
 
   onSubmit = (e) => {
     e.preventDefault();
@@ -18,6 +17,7 @@ class BookForm extends Component {
   onChange = (e) => {this.setState({[e.target.name]: e.target.value})}
 
   render() {
+    const {author, title, pages} = this.props.currentBook;
     return (
       <form ref={(el) => this.bookForm = el } className="Book" onSubmit={this.onSubmit} >
         <h4>Add a Book</h4>
@@ -28,6 +28,7 @@ class BookForm extends Component {
               name="author"
               className="form-control"
               onChange={this.onChange}
+              value={author}
           />
         </p>
         <p className="form-group">
@@ -37,6 +38,7 @@ class BookForm extends Component {
               name="title"
               className="form-control"
               onChange={this.onChange}
+              value={title}
           />
         </p>
         <p className="form-group">
@@ -46,6 +48,7 @@ class BookForm extends Component {
               name="pages"
               className="form-control"
               onChange={this.onChange}
+              value={pages}
           />
         </p>
         <p className="form-group">

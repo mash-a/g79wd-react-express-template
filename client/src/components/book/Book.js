@@ -19,7 +19,7 @@ class Book extends Component {
         <h3>{title}</h3>
         <p>{author} | {pages} pgs.</p>
         <span className="glyphicon glyphicon-pencil Book-Edit"
-          onClick={() => this.props.updateBook(id)}
+          onClick={() => this.props.editBook(id)}
          />
       </div>
     )

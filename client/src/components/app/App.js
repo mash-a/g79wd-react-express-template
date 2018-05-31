@@ -9,35 +9,47 @@ class App extends Component {
     loading: true,
     books: [],
     editing: false,
-    currentBook
+    currentBook: {
+      id: null,
+      title: "",
+      author: "",
+      pages: ""
+    }
+  }
+
+  componentWillMount = async () => {
+    const response = await fetch('/api/books')
+    const json = await response.json()
+    if (json.books) this.setState({ loading: false, books: json.books})
   }
 
   updateBooks = (books) => {
     this.setState({books: books})
   }
 
-  updateBook = id => {
-    console.log(`You click on book ${id}`)
+  editBook = (id) => {
+    const book = this.state.books.filter(b => b.id === id)[0];
+    this.setState({editing: true, currentBook: book})
   }
 
-  componentWillMount = async () => {
-    const response = await fetch('/api/books')
-    const json = await response.json()
-    console.log(json.books)
-    if (json.books) this.setState({ loading: false, books: json.books})
+  updateBook = id => {
+    
   }
 
   render() {
     const books = this.state.books.map( (book) => {
       return <Book key={book.id} book={book} 
       updateBooks={this.updateBooks} 
-      updateBook={this.updateBook}
+      editBook={this.editBook}
       />
     });
     return (
       <div className="App">
         <Header />
-        <BookForm updateBooks={this.updateBooks}/>
+        <BookForm updateBooks={this.updateBooks}
+        currentBook={this.state.currentBook}
+        editing={this.state.editing}
+        />
         {
           !this.state.loading && books
         }
