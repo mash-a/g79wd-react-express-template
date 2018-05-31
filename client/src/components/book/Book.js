@@ -4,20 +4,23 @@ import axios from 'axios';
 
 class Book extends Component {
 
-  onClick = (id) => {
+  onDelete = (id) => {
     axios.delete(`/api/books/${id}`)
       .then((result) => {this.props.updateBooks(result.data)})
   }
-
+  
   render() {
     const {author, title, pages, id} = this.props.book
     return (
       <div className="Book">
         <span className="glyphicon glyphicon-remove-sign Book-Delete"
-          onClick={() => this.onClick(id)}
+          onClick={() => this.onDelete(id)}
          />
         <h3>{title}</h3>
         <p>{author} | {pages} pgs.</p>
+        <span className="glyphicon glyphicon-pencil Book-Edit"
+          onClick={() => this.props.updateBook(id)}
+         />
       </div>
     )
   }

@@ -9,8 +9,14 @@
 }
 
 .Book-Delete {
-  padding: 1em;
   color: #CCC;
   cursor: pointer;
   float: right;
 }
+
+.Book-Edit {
+  padding: 1em;
+  color: #CCC;
+  cursor: pointer;
+}
+

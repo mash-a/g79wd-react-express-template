@@ -7,11 +7,17 @@ import BookForm from '../form/BookForm';
 class App extends Component {
   state = {
     loading: true,
-    books: []
+    books: [],
+    editing: false,
+    currentBook
   }
 
   updateBooks = (books) => {
     this.setState({books: books})
+  }
+
+  updateBook = id => {
+    console.log(`You click on book ${id}`)
   }
 
   componentWillMount = async () => {
@@ -23,7 +29,10 @@ class App extends Component {
 
   render() {
     const books = this.state.books.map( (book) => {
-      return <Book key={book.id} book={book} updateBooks={this.updateBooks} />
+      return <Book key={book.id} book={book} 
+      updateBooks={this.updateBooks} 
+      updateBook={this.updateBook}
+      />
     });
     return (
       <div className="App">
