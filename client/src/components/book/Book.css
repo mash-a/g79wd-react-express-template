@@ -5,4 +5,12 @@
   padding: 1em;
   margin: .5em;
   float: left;
+  overflow: scroll;
+}
+
+.Book-Delete {
+  padding: 1em;
+  color: #CCC;
+  cursor: pointer;
+  float: right;
 }

@@ -23,7 +23,7 @@ class App extends Component {
 
   render() {
     const books = this.state.books.map( (book) => {
-      return <Book key={book.id} book={book} />
+      return <Book key={book.id} book={book} updateBooks={this.updateBooks} />
     });
     return (
       <div className="App">
