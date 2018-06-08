@@ -20,12 +20,12 @@ app.get('/api/ping', (req, res, next) => {
 })
 
 app.get('/api/books', (req, res, next) => {
-  knex('books').then(books => res.json({books: books}))
+  knex('books').orderBy("id", "desc").then(books => res.json({books: books}))
 })
 
 app.post('/api/books', (req, res, next) => {
   knex('books').insert(req.body).then(() => {
-    knex('books').then(books => res.json(books))
+    knex('books').orderBy("id", "desc").then(books => res.json(books))
   })
 })
 
@@ -33,7 +33,7 @@ app.patch("/api/books/:id", (req, res, next) => {
   knex("books").update(req.body)
   .where("id", req.params.id)
   .then(() => {
-    knex("books").then(books => res.json(books))
+    knex("books").orderBy("id", "desc").then(books => res.json(books))
     })
 })
 
@@ -45,7 +45,7 @@ app.get('/', (req, res, next) => {
 app.delete('/api/books/:id', (req, res, next) => {
   knex('books').del().where('id', req.params.id)
     .then(() => {
-      knex('books').then(books => res.json(books))
+      knex('books').orderBy("id", "desc").then(books => res.json(books))
     })
 })
 

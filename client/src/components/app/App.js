@@ -23,17 +23,40 @@ class App extends Component {
     if (json.books) this.setState({ loading: false, books: json.books})
   }
 
-  updateBooks = (books) => {
-    this.setState({books: books})
+  updateBooks = books => {
+    this.setState({
+      books: books,
+      editing: false,
+      currentBook: {
+        id: null,
+        title: "",
+        author: "",
+        pages: ""
+      }
+    })
+
   }
 
-  editBook = (id) => {
+  editBook = id => {
     const book = this.state.books.filter(b => b.id === id)[0];
     this.setState({editing: true, currentBook: book})
   }
 
-  updateBook = id => {
-    
+  updateBook = (attribute, newValue) => {
+    this.setState({currentBook: {
+                    ...this.state.currentBook,
+                    [attribute]: newValue
+                  }
+                })
+  }
+
+  stopEdit = () => {
+    this.setState({editing:false,  currentBook: {
+      id: null,
+      title: "",
+      author: "",
+      pages: ""
+    } })
   }
 
   render() {
@@ -49,6 +72,8 @@ class App extends Component {
         <BookForm updateBooks={this.updateBooks}
         currentBook={this.state.currentBook}
         editing={this.state.editing}
+        updateBook={this.updateBook}
+        stopEdit={this.stopEdit}
         />
         {
           !this.state.loading && books

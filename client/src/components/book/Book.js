@@ -17,7 +17,7 @@ class Book extends Component {
           onClick={() => this.onDelete(id)}
          />
         <h3>{title}</h3>
-        <p>{author} | {pages} pgs.</p>
+        <p>{author} | {pages} {pages === 1 ? "pg" : "pgs"}</p>
         <span className="glyphicon glyphicon-pencil Book-Edit"
           onClick={() => this.props.editBook(id)}
          />
